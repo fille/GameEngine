@@ -17,40 +17,50 @@
             var heightdiff = [];
              heightdiff[-1] = 20;
            	  heightdiff[0] = 40;
+           	  heightdiff[1] = 60;
             
             var flatlandleft =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
+				var flatlandright =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
             var climbleft =  {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":40,"px4":0,"px5":0,"jumpx": 80,"jumpy":20}
             var toptriangleright =  {"py1" : 20 , "py2":20,"py3":40,"py4":20,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":20}
            
 				var flatlandright =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
                
-            var mapleft = [[{"typ":1,"index":0 },{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":1,"index":-1 }]]//,[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1]]
+            var mapleft = [
+            [{"typ":1,"index":0 },{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}],
+            [{"typ":1,"index":0 },{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}]
+            
+            ]//,[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1]]
+          
             var mapright = [[1,1,1],[1,1,1,1]]//,[1,1,1,1]]; //],2,1],[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2]]
          	var mapleft;   
             var canvas;
             var jumpindexy = 0;
             var jumpindexx = 0;
-           
-           var init = function () {
+
+
+var init = function () {
                canvas = document.getElementById("can").getContext('2d');
-            }
+}
             
-				var draw = function() {
+var draw = function() {
 				
 					drawleft();
-					//drawRight();
-				}            
+					drawRight();
+}            
             
             
             
-            var drawleft = function () {
+var drawleft = function () {
                 
-                 var typ = flatlandleft;
-                 var lasttyp = flatlandleft;
-                var jumpindexx = 100; 
-                 for(var i = 0;i < mapleft.length ;i++ ) {
+                var typ = flatlandleft;
+                var lasttyp = flatlandleft;
+                var jumpindexx = 0; 
                 
-                   var current = mapleft[i];
+                for(var i = 0;i < mapleft.length ;i++ ) {
+                
+                  var current = mapleft[i];
+                  
                    for(var x = 0;x < current.length ;x++ ) {
                         
                         var obj  = current[x]
@@ -72,35 +82,40 @@
                                 break;
                             }
                         }
-                       // jumpindexy += 100;
-                        canvas.moveTo(typ.px1+jumpindexx,typ.py1+jumpindexy);
-                        canvas.lineTo(typ.px2+jumpindexx,typ.py2+jumpindexy);
-                        canvas.lineTo(typ.px3+jumpindexx,typ.py3+jumpindexy);
-                        canvas.lineTo(typ.px4+jumpindexx,typ.py4+jumpindexy)
-                        canvas.lineTo(typ.px5+jumpindexx,typ.py5+jumpindexy)
-                        lastobj = obj;
-                        jumpindexy += heightdiff[height];
-                        
+                  canvas.moveTo(typ.px1+jumpindexx,typ.py1+jumpindexy);
+                  canvas.lineTo(typ.px2+jumpindexx,typ.py2+jumpindexy);
+                  canvas.lineTo(typ.px3+jumpindexx,typ.py3+jumpindexy);
+                  canvas.lineTo(typ.px4+jumpindexx,typ.py4+jumpindexy)
+                  canvas.lineTo(typ.px5+jumpindexx,typ.py5+jumpindexy)
+                  lastobj = obj;
+                  jumpindexy += heightdiff[height];
                  }
-                 jumpindexx +=  100
-                 jumpindexy =0
-                }
+           jumpindexx +=  100
+           jumpindexy =0
+         }
                 canvas.stroke();
-            }
+}
+
+/*
+ *
+ *
+ *
+ */
             
-            var drawRight = function()
-				{
-				
-					  var typ;
-                 var jumpindexx =140
-                 var lasttyp = flatlandright;
-                 
+var drawRight = function () {
+                
+                var typ = flatlandright;
+                var lasttyp = flatlandright;
+                var jumpindexx = 40; 
                  for(var i = 0;i < mapleft.length ;i++ ) {
                 
                    var current = mapleft[i];
+						 var jumpindexy =20;                   
                    for(var x = 0;x < current.length ;x++ ) {
-                        
-                        var objtyp = current[x];
+                      
+                        var obj  = current[x]
+                        var objtyp = obj.typ;
+                        var height = obj.index;
                         switch(objtyp)
                         {
                             case 1:    {
@@ -116,22 +131,20 @@
                                 break;
                             }
                         }
-                        jumpindexy +=  lasttyp.jumpy;
                         canvas.moveTo(typ.px1+jumpindexx,typ.py1+jumpindexy);
                         canvas.lineTo(typ.px2+jumpindexx,typ.py2+jumpindexy);
                         canvas.lineTo(typ.px3+jumpindexx,typ.py3+jumpindexy);
-                        canvas.lineTo(typ.px4+jumpindexx, typ.py4+jumpindexy)
+                        canvas.lineTo(typ.px4+jumpindexx,typ.py4+jumpindexy)
                         canvas.lineTo(typ.px5+jumpindexx,typ.py5+jumpindexy)
-                        lasttyp = typ;
+                        lastobj = obj;
+                        jumpindexy += heightdiff[height];
                         
                  }
-                 jumpindexx +=  lasttyp.jumpx
-                 jumpindexy =0
+                 jumpindexx +=  100
+                 jumpindexy =20
                 }
                 canvas.stroke();
-           
-				
-				}
+            }
             
             $(function() {
                  init();
