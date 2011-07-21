@@ -33,12 +33,13 @@
             var flatlandleft =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
 				var flatlandright =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
             var climbleft =  {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":40,"px4":0,"px5":0,"jumpx": 80,"jumpy":20}
+				var climbright =  {"py1" : 20 , "py2":0,"py3":20,"py4":40,"py5":20,"px1":0,"px2":40,"px3":40,"px4":0,"px5":0,"jumpx": 80,"jumpy":20}
             var toptriangleright =  {"py1" : 20 , "py2":20,"py3":40,"py4":20,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":20}
            
 				var flatlandright =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
                
             var mapleft = [
-            [{"typ":1,"index":0 },{"typ":1,"index":0 }]//,{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}],
+            [{"typ":1,"index":0 },{"typ":1,"index":0 },{"typ":4,"index":0 }]//,{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}],
           //  [{"typ":1,"index":0},{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}]
             
             ]//,[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1]]
@@ -93,6 +94,10 @@ var drawleft = function () {
                             case 3:{
                                 typ = toptriangleright;
                                 break;
+                            }
+                            case 4:{
+                            	typ = climbright;
+                            	break
                             }
                         }
                   canvas.moveTo(typ.px1+jumpindexx,typ.py1+jumpindexy);
