@@ -13,8 +13,8 @@
     </head>
     <body>
         <script type="text/javascript">
-					//x y 
-			var points = [ [100,100,100] ,[150,100,100], [100,150,100],[100,150,150],[150,150,150] ]
+					//x y 																			  here
+			var points = [ [100,100,100] ,[150,100,100],[150,100,150], [100,150,100], [100,150,100],[150,150,100],[100,150,150],[150,150,150] ]
 var init = function () {
                canvas = document.getElementById("can").getContext('2d');
 	
@@ -45,15 +45,15 @@ var drawleft = function () {
         	
            
              newx = x-z;
-             newy = (0.5*(x+z))+y;
+             newy =   y + 0.5*(x+z);
              cord.push({"x":newx,"y":newy});
         }  
         for(var i = 0;i < cord.length;i++)
         {
         	  var cordi = cord[i];
         	  console.log(cordi);
-      		
-      		canvas.lineTo(cordi.x+100,cordi.y);
+      		canvas.moveTo(cordi.x+100,cordi.y);
+      		canvas.lineTo(cordi.x+101,cordi.y);
       	}	          
       	canvas.stroke();
 }
