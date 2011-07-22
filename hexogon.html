@@ -13,160 +13,51 @@
     </head>
     <body>
         <script type="text/javascript">
-            
-            var heightdiff = [];
-            
-             heightdiff[-2] = 0;
-             heightdiff[-1] = 20;
-           	  heightdiff[0] = 40;
-           	  heightdiff[1] = 60;
-           	  heightdiff[2] = 80;
-           	  
-           	  var heightdiffright = [];
-            
-             heightdiffright[-2] = -10;
-             heightdiffright[-1] = 20;
-           	  heightdiffright[0] = 40;
-           	  heightdiffright[1] = 60;
-           	  heightdiffright[2] = 80;
-            
-            var flatlandleft =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
-				var flatlandright =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
-            var climbleft =  {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":40,"px4":0,"px5":0,"jumpx": 80,"jumpy":20}
-				var climbright =  {"py1" : 20 , "py2":0,"py3":20,"py4":40,"py5":20,"px1":0,"px2":40,"px3":40,"px4":0,"px5":0,"jumpx": 80,"jumpy":20}
-            var toptriangleright =  {"py1" : 20 , "py2":20,"py3":40,"py4":20,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":20}
-           
-				var flatlandright =   {"py1" : 20 , "py2":40,"py3":60,"py4":40,"py5":20,"px1":0,"px2":40,"px3":0,"px4":-40,"px5":0,"jumpx": 80,"jumpy":40}
-               
-            var mapleft = [
-            [{"typ":1,"index":0 },{"typ":1,"index":0 },{"typ":4,"index":0 }]//,{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}],
-          //  [{"typ":1,"index":0},{"typ":1,"index":0 },{"typ":2,"index":-1 },{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}]
-            
-            ]//,[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1],[1,1,1,2,1]]
-          
-             var mapright = [
-            [{"typ":1,"index":0 },{"typ":1,"index":0 },{"typ":2,"index":-1 }, {"typ":0,"index":-1}]//{"typ":2,"index":-1 },{"typ":1,"index":0 },{"typ":1,"index": 0}],
-            ]
-          
-            var canvas;
-            var jumpindexy = 0;
-            var jumpindexx = 0;
-
-
+					//x y 
+			var points = [ [100,100,100] ,[150,100,100], [100,150,100],[100,150,150],[150,150,150] ]
 var init = function () {
                canvas = document.getElementById("can").getContext('2d');
+	
+
 }
             
 var draw = function() {
 				
 					
-					drawleft();
-				 	drawRight();
+				 	drawleft();
 }            
             
             
             
 var drawleft = function () {
-                
-                var typ = flatlandleft;
-                var lasttyp = flatlandleft;
-                var jumpindexx = 0; 
-                
-                for(var i = 0;i < mapleft.length ;i++ ) {
-                 var	jumpX =   (i % 2)?40:80;
-                  var current = mapleft[i];
-                  
-                   for(var x = 0;x < current.length ;x++ ) {
-                        
-                        var obj  = current[x]
-                        var objtyp = obj.typ;
-                        var height = obj.index;
-                        switch(objtyp)
-                        {
-                            case 1:    {
-                                typ = flatlandleft;
-                                break;
-                            }
-                            case 2:{
-                                typ = climbleft;
-                                break;
-                            }
-                            case 3:{
-                                typ = toptriangleright;
-                                break;
-                            }
-                            case 4:{
-                            	typ = climbright;
-                            	break
-                            }
-                        }
-                  canvas.moveTo(typ.px1+jumpindexx,typ.py1+jumpindexy);
-                  canvas.lineTo(typ.px2+jumpindexx,typ.py2+jumpindexy);
-                  canvas.lineTo(typ.px3+jumpindexx,typ.py3+jumpindexy);
-                  canvas.lineTo(typ.px4+jumpindexx,typ.py4+jumpindexy)
-                  canvas.lineTo(typ.px5+jumpindexx,typ.py5+jumpindexy)
-                  lastobj = obj;
-                  jumpindexy += heightdiff[height];
-					                
-                 }
-           jumpindexx +=  80;jumpX;
-           jumpindexy =0
-         }
-	canvas.stroke();
+           
+			var x  = 0;
+			var y  = 0;
+			var z = 0;    
+			var newx = 0;
+			var newy = 0;       
+         var cord = [];
+        for(var i = 0;i < points.length;i++)
+        {
+        		 x =  points[i][0];
+        		 y =  points[i][1];
+				 z =  points[i][2];
+        	
+           
+             newx = x-z;
+             newy = (0.5*(x+z))+y;
+             cord.push({"x":newx,"y":newy});
+        }  
+        for(var i = 0;i < cord.length;i++)
+        {
+        	  var cordi = cord[i];
+        	  console.log(cordi);
+      		
+      		canvas.lineTo(cordi.x+100,cordi.y);
+      	}	          
+      	canvas.stroke();
 }
 
-/*
- *
- *
- *
- */
-            
-var drawRight = function () {
-                
-                var typ = flatlandright;
-                var lasttyp = flatlandright;
-                var jumpindexx = 40; 
-                 for(var i = 0;i < mapright.length ;i++ ) {
-                
-               	 var current = mapright[i];
-						 var jumpindexy =-20;                   
-                   
-                   for(var x = 0;x < current.length ;x++ ) {
-                      
-                        var obj  = current[x]
-                        var objtyp = obj.typ;
-                        var height = obj.index;
-                     	
-                     	switch(objtyp)
-                        {
-                            case 1:    {
-                                typ = flatlandright;
-                                break;
-                            }
-                            case 2:{
-                                typ = climbleft;
-                                break;
-                            }
-                            case 3:{
-                                typ = toptriangleright;
-                                break;
-                            }
-                        }
-                        
-                        canvas.moveTo(typ.px1+jumpindexx,typ.py1+jumpindexy);
-                        canvas.lineTo(typ.px2+jumpindexx,typ.py2+jumpindexy);
-                        canvas.lineTo(typ.px3+jumpindexx,typ.py3+jumpindexy);
-                        canvas.lineTo(typ.px4+jumpindexx,typ.py4+jumpindexy)
-                        canvas.lineTo(typ.px5+jumpindexx,typ.py5+jumpindexy)
-                        lastobj = obj;
-                        jumpindexy += heightdiffright[height];
-                        console.log(jumpindexy) 
-                 }
-                 jumpindexx += 40;
-                 jumpindexy =0
-                }
-                canvas.stroke();
-            }
             
             $(function() {
                  init();
