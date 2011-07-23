@@ -13,7 +13,7 @@
     </head>
     <body>
         <script type="text/javascript">
-						
+		 	
 			var Point = function(x,y,z){
 							 this.x = x;
 							 this.y = y;
@@ -40,14 +40,30 @@
 										new Point(60,60,30),
 										new Point(30,60,30),
 										new Point(60,60,60));
-					//x y 																			  here
-			var points = [ [30,30,30] ,[60,30,30],[60,30,60], [30,30,60], [30,60,30],[60,60,30],[30,60,30],[60,60,60] ]
+			var buildTile = 	function()
+			{
+			   var out = []
+			   base = 30;
+				for(var i = 0; i < 10;i++){
+								
+						out.push(new Figure(new Point(30,30,30),
+												  new Point(60,30,30),
+												  new Point(60,30,60),
+												  new Point(30,30,60),
+												  new Point(30,60,30),
+												  new Point(60,60,30),
+												  new Point(30,60,30),
+												  new Point(60,60,60)))
+				}
+				return out;
+			}
+												
+		  var tile = buildTile();								
 var init = function () {
     canvas = document.getElementById("can").getContext('2d');
 }
             
 var draw = function() {
-	 
 	 drawleft();
 }            
             
@@ -61,23 +77,28 @@ var drawleft = function () {
 			var newx = 0;
 			var newy = 0;       
          var cord = [];
-        for(var i = 0;i < points.length;i++)
+        for(var j = 0;j < tile.length;j++)
         {
-        		 x =  points[i][0];
-        		 y =  points[i][1];
-				 z =  points[i][2];
-    
+        
+        for(var i = 0;i < tile[j].coords.length;i++)
+        {	
+        	   var obj =	tile[j];
+        		 x =  obj.coords[i].x;
+        		 y =  obj.coords[i].y;
+				 z =  obj.coords[i].z;
+    			console.log(obj);
              newx = x-z;
-             newy =   y + 0.5*(x+z);
+             newy = y + 0.5*(x+z);
              cord.push({"x":newx,"y":newy});
 		  }
 		  
-       	  canvas.moveTo(cord[0].x+100,cord[0].y);
-      	  canvas.lineTo(cord[1].x+100,cord[1].y);
-			  canvas.lineTo(cord[2].x+100,cord[2].y);
-			  canvas.lineTo(cord[3].x+100,cord[3].y);
-			  canvas.lineTo(cord[0].x+100,cord[0].y);
+       	  canvas.moveTo(cord[0].x,cord[0].y);
+      	  canvas.lineTo(cord[1].x,cord[1].y);
+			  canvas.lineTo(cord[2].x,cord[2].y);
+			  canvas.lineTo(cord[3].x,cord[3].y);
+			  canvas.lineTo(cord[0].x,cord[0].y);
 			  canvas.stroke();
+		}
 }
 
             
