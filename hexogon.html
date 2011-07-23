@@ -48,13 +48,15 @@ var drawleft = function () {
              newy =   y + 0.5*(x+z);
              cord.push({"x":newx,"y":newy});
         }  
-        for(var i = 0;i < cord.length;i++)
-        {
-        	  var cordi = cord[i];
-        	  console.log(cordi);
-      		canvas.moveTo(cordi.x+100,cordi.y);
-      		canvas.lineTo(cordi.x+101,cordi.y);
-      	}	          
+       
+        	 
+        	  
+        	  canvas.moveTo(cord[0].x+100,cord[0].y);
+      	  canvas.lineTo(cord[1].x+100,cord[1].y);
+				canvas.lineTo(cord[2].x+100,cord[2].y);
+				canvas.lineTo(cord[3].x+100,cord[3].y);
+				canvas.lineTo(cord[0].x+100,cord[0].y);
+				      	
       	canvas.stroke();
 }
 
