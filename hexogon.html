@@ -10,105 +10,103 @@
                 border:1px solid black;
             }
         </style>
-    </head>
-    <body>
-        <script type="text/javascript">
+</head>
+<body>
+    <script type="text/javascript">
 		 	
-			var Point = function(x,y,z){
-							 this.x = x;
-							 this.y = y;
-							 this.z = z;
-							}
-			var Figure = function(p1,p2,p3,p4,p5,p6,p7,p8)
-			{
-				this.p1 = p1;
-				this.p2 = p2;
-				this.p3 = p3;
-				this.p4 = p4;
-				this.p5 = p5;
-				this.p6 = p6;
-				this.p7 = p7;
-				this.p8 = p8;
-				this.coords = [this.p1,this.p2,this.p3,this.p4,this.p5,this.p6,this.p7,this.p8];
-			}
-			
-			var obj = new Figure(new Point(30,30,30),
-										new Point(60,30,30),
-										new Point(60,30,60),
-										new Point(30,30,60),
-										new Point(30,60,30),
-										new Point(60,60,30),
-										new Point(30,60,30),
-										new Point(60,60,60));
-			var buildTile = 	function()
-			{
-			   var out = []
-			   base = 30;
-				for(var i = 0; i < 10;i++){
-								
-						out.push(new Figure(new Point(30,30,30),
-												  new Point(60,30,30),
-												  new Point(60,30,60),
-												  new Point(30,30,60),
-												  new Point(30,60,30),
-												  new Point(60,60,30),
-												  new Point(30,60,30),
-												  new Point(60,60,60)))
-				}
-				return out;
-			}
-												
-		  var tile = buildTile();								
-var init = function () {
-    canvas = document.getElementById("can").getContext('2d');
-}
-            
-var draw = function() {
-	 drawleft();
-}            
-            
-            
-            
-var drawleft = function () {
-           
-			var x  = 0;
-			var y  = 0;
-			var z = 0;    
-			var newx = 0;
-			var newy = 0;       
-         var cord = [];
-        for(var j = 0;j < tile.length;j++)
+        var Point = function(x,y,z){
+
+                        this.x = x;
+                        this.y = y;
+                        this.z = z;
+        }
+        var Figure = function(p1,p2,p3,p4,p5,p6,p7,p8)
         {
-        
-        for(var i = 0;i < tile[j].coords.length;i++)
-        {	
-        	   var obj =	tile[j];
-        		 x =  obj.coords[i].x;
-        		 y =  obj.coords[i].y;
-				 z =  obj.coords[i].z;
-    			console.log(obj);
+                this.p1 = p1;
+                this.p2 = p2;
+                this.p3 = p3;
+                this.p4 = p4;
+                this.p5 = p5;
+                this.p6 = p6;
+                this.p7 = p7;
+                this.p8 = p8;
+                this.coords = [this.p1,this.p2,this.p3,this.p4,this.p5,this.p6,this.p7,this.p8];
+        }
+
+        var obj = new Figure(new Point(30,30,30),
+                             new Point(60,30,30),
+                             new Point(60,30,60),
+                             new Point(30,30,60),
+                             new Point(30,60,30),
+                             new Point(60,60,30),
+                             new Point(30,60,30),
+                             new Point(60,60,60));
+        var buildTile = function()
+        {
+           var out = []
+           base = 30;
+                for(var i = 0; i < 10;i++){
+
+                 out.push(new Figure(new Point(30,30,30),
+                                     new Point(60,30,30),
+                                     new Point(60,30,60),
+                                     new Point(30,30,60),
+                                     new Point(30,60,30),
+                                     new Point(60,60,30),
+                                     new Point(30,60,30),
+                                     new Point(60,60,60)))
+                }
+                return out;
+        }
+
+
+    var init = function () {
+        canvas = document.getElementById("can").getContext('2d');
+    }
+
+    var draw = function() {
+        drawleft();
+    }
+
+    var tile = buildTile();
+            
+    var drawleft = function () {
+           
+    var x  = 0;
+    var y  = 0;
+    var z = 0;
+    var newx = 0;
+    var newy = 0;
+    var cord = [];
+
+    for(var j = 0;j < tile.length;j++){
+
+        for(var i = 0;i < tile[j].coords.length;i++){
+             var obj =	tile[j];
+             x =  obj.coords[i].x;
+             y =  obj.coords[i].y;
+             z =  obj.coords[i].z;
              newx = x-z;
              newy = y + 0.5*(x+z);
              cord.push({"x":newx,"y":newy});
-		  }
+         }
 		  
        	  canvas.moveTo(cord[0].x,cord[0].y);
       	  canvas.lineTo(cord[1].x,cord[1].y);
-			  canvas.lineTo(cord[2].x,cord[2].y);
-			  canvas.lineTo(cord[3].x,cord[3].y);
-			  canvas.lineTo(cord[0].x,cord[0].y);
-			  canvas.stroke();
-		}
+	  canvas.lineTo(cord[2].x,cord[2].y);
+	  canvas.lineTo(cord[3].x,cord[3].y);
+	  canvas.lineTo(cord[0].x,cord[0].y);
+	  canvas.stroke();
+	}
 }
 
             
    $(function() {
-                 init();
-                draw();
-            })
-            
-            
-        </script>
+        init();
+        draw();
+    })
+
+    </script>
         
         <canvas id="can" width="640" height="480"></canvas>
     </body>
