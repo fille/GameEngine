@@ -45,17 +45,31 @@
         {
            var out = []
            base = 30;
-                for(var i = 0; i < 10;i++){
+                
 
                  out.push(new Figure(new Point(30,30,30),
                                      new Point(60,30,30),
                                      new Point(60,30,60),
                                      new Point(30,30,60),
-                                     new Point(30,60,30),
+                                     new Point(30,60,30), //here
                                      new Point(60,60,30),
                                      new Point(30,60,30),
-                                     new Point(60,60,60)))
-                }
+                                     new Point(60,60,60)),
+				     new Figure( new Point(100,60,30),
+						 new Point(60,60,30),
+						 new Point(30,60,30),
+						 new Point(60,60,60),
+						 new Point(0,0,0),
+						 new Point(0,0,0),
+						 new Point(0,0,0),
+						 new Point(0,0,0)
+						
+				    )
+			
+                            
+                                    )
+		
+                
                 return out;
         }
 
@@ -80,22 +94,24 @@
     var cord = [];
 
     for(var j = 0;j < tile.length;j++){
-
+        cord =[]
         for(var i = 0;i < tile[j].coords.length;i++){
              var obj =	tile[j];
+	   
              x =  obj.coords[i].x;
              y =  obj.coords[i].y;
              z =  obj.coords[i].z;
              newx = x-z;
              newy = y + 0.5*(x+z);
              cord.push({"x":newx,"y":newy});
-         }
-		  
-       	  canvas.moveTo(cord[0].x,cord[0].y);
-      	  canvas.lineTo(cord[1].x,cord[1].y);
-	  canvas.lineTo(cord[2].x,cord[2].y);
-	  canvas.lineTo(cord[3].x,cord[3].y);
-	  canvas.lineTo(cord[0].x,cord[0].y);
+        
+	 }
+			  
+       	  canvas.moveTo(cord[0].x+100,cord[0].y);
+      	  canvas.lineTo(cord[1].x+100,cord[1].y);
+	  canvas.lineTo(cord[2].x+100,cord[2].y);
+	  canvas.lineTo(cord[3].x+100,cord[3].y);
+	  canvas.lineTo(cord[0].x+100,cord[0].y);
 	  canvas.stroke();
 	}
 }
