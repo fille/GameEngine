@@ -51,18 +51,18 @@
                                      new Point(60,30,30),
                                      new Point(60,30,60),
                                      new Point(30,30,60),
-                                     new Point(30,60,30), //here
+                                     new Point(30,60,60), //here
+                                     new Point(60,60,60),
                                      new Point(60,60,30),
-                                     new Point(30,60,30),
-                                     new Point(60,60,60)),
-				     new Figure( new Point(100,60,30),
+                                     new Point(60,30,30)),
+				     new Figure( new Point(30,30,90),
+						 new Point(30,60,30),
+						 new Point(30,60,60),
+						 new Point(30,30,60),
+						 new Point(30,60,30),
 						 new Point(60,60,30),
 						 new Point(30,60,30),
-						 new Point(60,60,60),
-						 new Point(0,0,0),
-						 new Point(0,0,0),
-						 new Point(0,0,0),
-						 new Point(0,0,0)
+						 new Point(60,60,60)
 						
 				    )
 			
@@ -93,7 +93,7 @@
     var newy = 0;
     var cord = [];
 
-    for(var j = 0;j < tile.length;j++){
+    for(var j = 0;j < 1;j++){
         cord =[]
         for(var i = 0;i < tile[j].coords.length;i++){
              var obj =	tile[j];
@@ -112,6 +112,14 @@
 	  canvas.lineTo(cord[2].x+100,cord[2].y);
 	  canvas.lineTo(cord[3].x+100,cord[3].y);
 	  canvas.lineTo(cord[0].x+100,cord[0].y);
+	 
+	  canvas.moveTo(cord[3].x+100,cord[3].y)
+	  	  
+	  canvas.lineTo(cord[4].x+100,cord[4].y);
+	  canvas.lineTo(cord[5].x+100,cord[5].y); 
+	  canvas.lineTo(cord[6].x+100,cord[6].y);	
+	  canvas.lineTo(cord[7].x+100,cord[7].y);
+	//  canvas.lineTo(cord[0].x+100,cord[0].y);	  
 	  canvas.stroke();
 	}
 }
