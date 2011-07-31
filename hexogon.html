@@ -4,7 +4,9 @@
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/jquery.js"></script>
-        <style>
+	<script src="js/jquery-ui/js/jquery-ui-1.8.14.custom.min.js" ></script>
+        <link href="js/jquery-ui/css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet" />
+	<style>
             #can {
                 
                 border:1px solid black;
@@ -13,7 +15,10 @@
 </head>
 <body>
     <script type="text/javascript">
-		 	
+	var base = 30;
+	var addx = 0;
+	var addz = 0;
+	var addy = 0;	
         var Point = function(x,y,z){
 
                         this.x = x;
@@ -50,34 +55,33 @@
         {
            var line = [];
 	   var full = [];
-           base = 30;
-	   var y = 0;
+           
+	   var y = -20;
 	   var z = 0;
-  	   var add = 0;
-          for(var j = 0;j<20;j++ )
+  	  
+          for(var j = 0;j<10;j++ )
 	  {
 		line =[];
 			
-		for(var i = 0;i < 20;i++){
-	   	    
-	
+		for(var i = 0;i < 10;i++){
+	   	 
 		 	
-	  	var  current = new Figure(new Point(30+add,30+y,30+z),
-                                    	  new Point(60+add,30+y,30+z),
-                                     	  new Point(60+add,30+y,60+z),
-                                          new Point(30+add,30+y,60+z),
-                                          new Point(30+add,60+y,60+z), //here
-                                          new Point(60+add,60+y,60+z),
-                                          new Point(60+add,60+y,30+z),
-                                          new Point(30+add,60+y,30+z))
+	  	var  current = new Figure(new Point(base*1+addx,base*1+addy,base*1+addz),
+                                    	  new Point(base*2+addx,base*1+addy,base*1+addz),
+                                     	  new Point(base*2+addx,base*1+addy,base*2+addz),
+                                          new Point(base*1+addx,base*1+addy,base*2+addz),
+                                          new Point(base*1+addx,base*2+addy,base*2+addz), //here
+                                          new Point(base*2+addx,base*2+addy,base*2+addz),
+                                          new Point(base*2+addx,base*2+addy,base*1+addz),
+                                          new Point(base*1+addx,base*2+addy,base*1+addz))
 			line.push(current);
-		 z +=30
+		 addz +=30;
 		  				
 		}
  
 		full.push(line)
-	        z = 0; 	 
-	  	add += 30;
+	        addz = 0;  
+	  	addx += 30;
 	     }		
                 return full;
         }
@@ -120,24 +124,42 @@
 	 
 	  canvas.moveTo(cord[3].x,cord[3].y)
 	  	  
-	  canvas.lineTo(cord[4].x,cord[4].y);
-	  canvas.lineTo(cord[5].x,cord[5].y); 
-	  canvas.lineTo(cord[6].x,cord[6].y);	
-	  canvas.lineTo(cord[7].x,cord[7].y);
+	 // canvas.lineTo(cord[4].x,cord[4].y);
+	 // canvas.lineTo(cord[5].x,cord[5].y); 
+	 // canvas.lineTo(cord[6].x,cord[6].y);	
+	  ////canvas.lineTo(cord[7].x,cord[7].y);
 	 // canvas.lineTo(cord[0].x+100,cord[0].y);	  
 	  canvas.stroke();
+	  console.log("hej");
 }
-	}
+
+}
+
 }
 
             
    $(function() {
         init();
-        draw();
+       draw(); 
+	$("#buttondraw").click(function() {
+		
+	    base = $("#base").val();
+	    draw();
+	})
+	$("#slider").slider({max:200});
+	$("#slider").bind("slidechange",function(event,ui) {   
+	
+			addx = ui.value
+			draw();
+	});	
     })
-
+	
+	
     </script>
         
         <canvas id="can" width="640" height="480"></canvas>
+	<input type="text" id="base" value="200" />
+	<input type="button" id="buttondraw" value="" /><br />
+	<div id="slider" style="width:500px;"></div>	
     </body>
 </html>
